@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api, reqparse
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 
 from models import User
 
 app = Flask(__name__)
+
+app.config['JWT_SECRET_KEY'] = 'todo-api-secret'
+jwt = JWTManager(app)
+
 api = Api(app)
 
 
@@ -26,11 +31,12 @@ class UserLogin(Resource):
                 }, 404
         
         if data['password'] == current_user['password']:
+            access_token = create_access_token(identity=current_user['username'])
             return {
                     'data': current_user,
                     'message': 'Login successful',
                     'status': 'success',
-                    'token': 'to be generated'
+                    'token': access_token
                 }, 200
         else:
             return {
