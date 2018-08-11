@@ -12,13 +12,11 @@ jwt = JWTManager(app)
 api = Api(app)
 
 
-
-parser = reqparse.RequestParser()
-parser.add_argument('username', help = 'Username field cannot be blank', required = True)
-parser.add_argument('password', help = 'Password field cannot be blank', required = True)
-
-class UserLogin(Resource):
+class Login(Resource):
     def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', help = 'Username field cannot be blank', required = True)
+        parser.add_argument('password', help = 'Password field cannot be blank', required = True)
         data = parser.parse_args()
         
         current_user = None
@@ -44,8 +42,37 @@ class UserLogin(Resource):
                     'status': 'unsuccessful'
                 }, 401
 
+class Signup(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', help = 'Username field cannot be blank', required = True)
+        parser.add_argument('password', help = 'Password field cannot be blank', required = True)
+        parser.add_argument('id', help = 'Id field cannot be blank', required = True)
+        parser.add_argument('name', help = 'Name field cannot be blank', required = True)
+        data = parser.parse_args()
 
-api.add_resource(UserLogin, '/login')
+        current_user = None
+        for user in User.users:
+            current_user = user if user['username'] == data['username'] else current_user
+        if current_user:
+            return {
+                    'message': 'User {} already exist'.format(data['username']),
+                    'status': 'unsuccessful',
+                }, 404
+    
+        User.users.append(data)
+        access_token = create_access_token(identity=data['username'])
+        return {
+                'data': data,
+                'message': 'User Created',
+                'status': 'success',
+                'token': access_token
+            }, 201 
+        
+
+
+api.add_resource(Login, '/login')
+api.add_resource(Signup, '/signup')
 
 
 if __name__ == '__main__':
