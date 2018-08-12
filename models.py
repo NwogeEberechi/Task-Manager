@@ -3,13 +3,13 @@ class User():
         {
             'id': 1,
             'name': 'Eberechi Daniel',
-            'username': 'Special',
-            'password':'preshy'
+            'email': 'eberechi@gmail.com',
+            'password':'test'
         },
         {
             'id': 2,
             'name': 'Anaeze Nsoffor',
-            'username': 'nzediegwu1',
+            'email': 'nzediegwu1@gmail.com',
             'password':'test'
         }
     ]
