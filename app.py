@@ -1,18 +1,18 @@
+import os
 import re
 
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from dotenv import load_dotenv
 
 from models import User
 
+load_dotenv()
 app = Flask(__name__)
-
-app.config['JWT_SECRET_KEY'] = 'todo-api-secret'
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 jwt = JWTManager(app)
-
 api = Api(app)
-
 EMAIL_REGEX = re.compile(r"[^@\s]+@[^@\s]+\.[a-zA-Z0-9]+$")
 
 

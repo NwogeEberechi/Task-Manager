@@ -1,5 +1,6 @@
 aniso8601==3.0.2
 click==6.7
+dotenv==0.0.5
 Flask==1.0.2
 Flask-JWT==0.3.2
 Flask-JWT-Extended==3.12.1
@@ -9,6 +10,7 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 PyJWT==1.4.2
+python-dotenv==0.9.1
 pytz==2018.5
 six==1.11.0
 Werkzeug==0.14.1
