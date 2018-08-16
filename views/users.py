@@ -59,10 +59,6 @@ class Login(Resource):
 
 class Signup(Resource):
     def post(self):
-        #parser = reqparse.RequestParser()
-        #parser.add_argument('email', help = 'email field cannot be blank', required = True)
-        #parser.add_argument('password', help = 'Password field cannot be blank', required = True)
-        #parser.add_argument('name', help = 'Name field cannot be blank', required = True)
         signup_parser = parser.copy()
         signup_parser.add_argument('name', help = 'Name field cannot be blank', required = True)
         data = signup_parser.parse_args()
