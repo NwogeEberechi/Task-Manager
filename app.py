@@ -5,8 +5,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
-from resource.login import Login
-from resource.signup import Signup
+from views.users import Login, Signup
 
 load_dotenv()
 app = Flask(__name__)
