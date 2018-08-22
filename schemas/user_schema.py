@@ -2,9 +2,9 @@ from marshmallow import Schema, fields, validates, ValidationError
 
 class UserSchema(Schema):
     id = fields.Integer()
-    name = fields.String()
-    email = fields.Email()
-    password = fields.String()
+    name = fields.String(required=True)
+    email = fields.Email(required=True)
+    password = fields.String(required=True)
 
     @validates('password')
     def validate_password(self, password):

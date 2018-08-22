@@ -5,10 +5,9 @@ class Response():
             'message': message
             }, code
 
-    def success(self, message, data, token, code):
+    def success(self, message, data, code):
         return {
             'status': 'success',
             'message': message,
             'data': data,
-            'token': token
             }, code
