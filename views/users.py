@@ -43,13 +43,9 @@ class Signup(Resource):
         if result.errors:
             return response.error(result.errors, 400)
         
-        current_user = None
         for user in User.users:
             if user['email'] == data['email']:
-                current_user = user
-                break
-        if current_user:
-            return response.error('User already exist', 409)
+                return response.error('User already exist', 409)
 
         data['id'] = len(User.users) + 1
         User.users.append(data)
